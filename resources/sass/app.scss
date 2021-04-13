@@ -1,0 +1,130 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+// Variables
+@import 'variables';
+$fa-font-path:        "../webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+
+
+@font-face {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 900;
+    src: url('/fonts/Gilroy-Light.otf');
+}
+
+
+// Bootstrap
+//@import '~bootstrap/scss/bootstrap';
+html
+{
+    transition-duration: 1s;
+    transition-property: background color;
+
+}
+body, html
+{
+    font-family: Gilroy;
+    padding: 0;
+    margin: 0;
+    margin: 0 !important;
+}
+body
+{
+    color: rgb(50,50,50);
+   // background: $body-bg;
+}
+a
+{
+    color: gray;
+}
+.link
+{
+    color: #136CB9;
+    font-weight: bold;
+}
+.toggle-button
+{
+    background: #136CB9;
+    color: white;
+    padding: 0.5vw;
+    width: 1vw;
+    line-height: 1vw;
+    text-align: center;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 0;
+}
+.phpdebugbar
+{
+    /*display: none;*/
+}
+.dark-mode
+{
+    background: rgb(30,30,30);
+    body{
+        color: white !important;
+
+    }
+    #input-message
+    {
+        border: none !important;
+        background: rgb(50,50,50) !important;
+        color: white;
+    }
+    select
+    {
+        background: rgb(70,70,70) !important;
+        color: white !important;
+
+    }
+
+    #left-column
+    {
+        background: rgb(20,20,20) !important;
+    }
+    #nav
+    {
+        border-color: rgb(40, 40, 40) !important;
+    }
+    #nav a
+    {
+        border-color: rgb(60, 60, 60) !important;
+    }
+    #theme-selector
+    {
+        background: white !important;
+    }
+
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .example {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+#left-column
+{
+  width: 20%;
+  min-height: 100vh;
+  background: #FAFAFA;
+  position: relative;
+  transition-duration: 1s;
+  transition-property: background color;
+}
+@media(max-width: 600px)
+{
+  #left-column
+  {
+      width: 50%;
+      font-size: 2vw;
+  }
+}

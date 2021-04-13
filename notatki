@@ -1,0 +1,10 @@
+/*
+Usunąć model SessionType. Po co tworzyć nową tabelę, skoro musi istnieć inna z tymi danymi.
+Ewentualnie mogę zmienić nazwę na OffertType i dodać relację z Session i z Offert
+-------------------------------------------------------
+nie no to glupie, lepiej nei tworzyć tej tabeli,
+ będę chciał to grupować pozniej w statystykach, więc niech istnieje relacja miedzy Session a Offer :)
+ !!
+ -------------------------------------------------
+
+*/

@@ -1,0 +1,9 @@
+---- do 16:30
+1. Dodać kazdy view do podstron w panelu admina:
+2. Dodać widok dla uzytkownikow
+3. Dodać zamówienia (niekoniecznie całe) 
+4. Oferte
+
+do 18:30
+Uzupełnić dashboard w panelu admina
+
