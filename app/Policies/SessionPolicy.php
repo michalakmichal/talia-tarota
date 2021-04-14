@@ -31,9 +31,9 @@ class SessionPolicy
      * @param  \App\Models\Session  $session
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function view(User $user, Session $session)
     {
-        return $user->id === $model->id 
+        return $session->users->contains($user)
         ? Response::allow()
         : Response::deny('You can\'t see other users\' sessions.');
     }

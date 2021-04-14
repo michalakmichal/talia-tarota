@@ -34,8 +34,10 @@ class SessionRepository implements SessionRepositoryInterface
         //refac: destrukturyzacja -> dodać cały obiekt $data + session_type = 1 - do niego
         $session = Session::create([
             'state_id' => 1,
-            'offer_id' => $data['offer_id']
+            'offer_id' => $data['offer_id'],
+            'start_date' => $data['date']
         ]);
+        // add created session to related users
         $session->users()->saveMany(User::find([$data['user_id'],11]));
         return $session;
     }

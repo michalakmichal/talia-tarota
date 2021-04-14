@@ -10,7 +10,7 @@ class Session extends Model
 {
     use HasFactory;
     protected $hidden = ['pivot'];
-    protected $fillable = ['state_id', 'offer_id', 'created_at'];
+    protected $fillable = ['state_id', 'offer_id', 'start_date', 'created_at'];
     
     public function getCreatedAtAttribute($value)
     {

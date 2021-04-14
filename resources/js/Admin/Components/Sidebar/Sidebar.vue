@@ -9,24 +9,6 @@ import {gsap} from 'gsap';
 import Category from '../Sidebar/Category.vue';
 
     export default {
-        components:
-        {
-            Category
-        },
-        props:
-        {
-           
-        },
-        computed: {
-        },
-        methods:
-        {
-
-            async init()
-            {
-               
-            }
-        },
        async mounted() {
             gsap.timeline().fromTo(this.$refs['notif'], {xPercent: -50, opacity: 0}, {
                 opacity: 1,

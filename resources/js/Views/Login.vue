@@ -275,13 +275,4 @@ import * as PIXI from 'pixi.js'
 }
 //end main.scss
 
-@media(max-width: 600px)
-{
-    #left-column
-    {
-        width: 50%;
-        font-size: 2vw;
-    }
-}
-
 </style>

@@ -19,7 +19,7 @@ class SessionController extends Controller
     {
         $this->sessionRepository = $sessionRepository;
         $this->userRepository = $userRepository;
-        $this->authorizeResource(Session::class);
+        $this->authorizeResource(Session::class, 'session');
     }
     public function index(Request $request)
     {

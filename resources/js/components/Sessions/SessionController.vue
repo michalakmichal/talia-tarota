@@ -1,8 +1,10 @@
 <template>
-    <div id="left-column" ref="left-column">
+    <div id="left-column" ref="left-column" v-if="sessions">
         <div id="content">
             <div class="toggle-button" @click="toggle"> < </div>
-            <Session v-for="session in sessions" class="session" :key="session.name" v-bind="session" ref="sessions"/>
+            <div v-for="session in sessions" ref="sessions">
+                <Session  class="session" :key="session.name" v-bind="session"/>
+            </div>
         </div>
     </div>
 </template>
@@ -21,13 +23,13 @@ export default
     data()
     {
         return {
-            tl: null
+            tl: null,
+            toggled: true
         };
     },
     computed:
     {
         ...mapGetters( {
-            authenticated: 'auth/authenticated',
             sessions: 'session/sessions'
         })
     },
@@ -41,27 +43,33 @@ export default
             if(this.toggled) this.tl.reverse();
             else this.tl.play();
             this.toggled=!this.toggled;
+        }
+    },
+    watch:
+    {   
+       sessions(n, o)
+        {
+            let self = this;
+            self.tl = null;
             
         }
     },
     async mounted(){
-        if(this.authenticated)
-        {
-            await this.getUserSessions();
-            console.log("SESJE START:",this.sessions);
-            //this.sessions = this.user_sessions;
-            let self = this;
-            this.$nextTick(()=>{
-                self.tl= gsap.timeline({paused: true}).fromTo('#left-column .session', {opacity: 1}, {
-                opacity: 0,
-                duration: 0.5,
-                //display: "none"
-            }).fromTo('#left-column'/*self.$refs['left-column']*/, {width: "20%"}, {
-                width: "2vw",
+        // Get user sessions
+        await this.getUserSessions();
+        // When loaded animate show up
+        let self = this;
+        this.$nextTick(()=>{
+            self.tl = gsap.timeline().fromTo(self.$refs['left-column'], {width: "2vw"}, {
+                width: "20%",
                 duration: 0.5
+            }).fromTo(self.$refs.sessions, {opacity: 0}, {
+            opacity: 1,
+            duration: 1,
+            //display: "none"
             });
-            });
-        }
+        });
+        
     }
 }
 </script>

@@ -21,13 +21,7 @@ Route::get('/{any}', PageController::class)->where('any','.*'); //->where('catch
 Route::get('/broadcast', function(){
     broadcast(new Hello());
     });
-Route::get('api/sessions', [SessionController::class, 'index']);
-Route::get('api/sessions/{session}', [SessionController::class, 'show']);
-Route::post('api/sessions', [SessionController::class, 'store']);
-Route::delete('api/sessions', [SessionController::class, 'destroy']);
-Route::put('api/sessions', [SessionController::class, 'update']);
 
 Auth::routes();
-
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

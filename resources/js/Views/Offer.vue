@@ -1,23 +1,21 @@
 <template>
-    <div id="offer-view" v-if="offer(id)">
+    <div id="offer-view" v-if="offer">
     <router-link :to="{path: `/offer/${id}/wrozba-ogolna`}" class="offer-tab" id="general"> 
             <div class="content">
-                <img v-for="image in offer(id).images" :src="image.url" :key="image.id" /> 
+                <img v-for="image in offer.images" :src="image.url" :key="image.id" /> 
             </div>
-            <span class="title"> {{ offer(id).name}} </span>
+            <span class="title"> {{ offer.name}} </span>
     </router-link>
         <div id="content">
-            <div class="price"> Cena: {{ offer(id).price}} zł </div>    
-            <div id="description" v-html="offer(id).description"> </div>
+            <div class="price"> Cena: {{ offer.price}} zł </div>    
+            <div id="description" v-html="offer.description"> </div>
                 <div style="margin-top: 2vw"> W celu zamówienia wrozby online proszę przeszłać preferowaną datę i godzinę spotkania.  </br> 
                 Gdy zgłoszenie zostanie zaakceptowane przez administratora otrzymasz maila z potwierdzeniem realizacji usługi oraz powiadomienie na stronie internetowej.
                 </div>
-                    <form id="offer-form" @submit.prevent="addSession ? addSession({
-                    offer_id: id
-                }) : ''"> 
+                    <form id="offer-form" @submit.prevent="submit"> 
                         <label for="datetime"> 
                             Data i godzina wrózby: 
-                            <input type="datetime-local" name="datetime" />
+                            <input type="datetime-local" name="datetime" ref="date"/>
                         </label>
                         <input type="submit"/>
                     </form>
@@ -38,17 +36,21 @@ export default {
         components: {
         },
         computed: {
-             ...mapGetters( {
-            offer: 'offer/offer'
-        })
-        },
-        mounted()
-        {
-                console.log("OFERTA TOOOO:", this.offer(this.id));
+            offer()
+            {
+                return this.$store.getters['common/offer/offer'](this.id);
+            }
         },
         methods:
         {
-           ...mapActions({addSession: 'session/addSession'})
+           ...mapActions({addSession: 'session/addSession'}),
+           submit()
+           {
+                this.addSession({
+                    offer_id: this.id, 
+                    date: this.$refs['date'].value
+                })
+           }
         }
 
 }

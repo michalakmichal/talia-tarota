@@ -5,7 +5,7 @@
             <theme-selector />
                 <span style="color: red;"> {{error}}</span>
                     <a href="#" @click.prevent="handleLogout" id="logout-button">Wyloguj się </a>
-        <navbar />
+        <navbar/>
         <router-view> </router-view>
     </div>
     </div>
@@ -34,7 +34,7 @@ const { mapActions, mapGetters, mapMutations } = createNamespacedHelpers('common
         computed: {
             ...mapGetters( {user: 'auth/user',
             authenticated: 'auth/authenticated',
-            error: 'auth/error'
+            error: 'auth/error',
             })
         },
         methods:

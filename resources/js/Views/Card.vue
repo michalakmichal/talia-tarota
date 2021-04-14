@@ -40,7 +40,6 @@ export default {
                 try
                 {
                     let response = await axios.get(`/api/cards/${this.id}`);
-                    console.log("ODDDP", response.data);
                     this.description = response.data.description;
                 }catch(err)
                 {

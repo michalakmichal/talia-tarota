@@ -15,8 +15,8 @@
         <div class="wrapper">
         {{ /* zbędne session.users.length!=0 ?  session.users[0].name  : "" */ }}
             <span class="link" style="display: none"> {{ users[0].name }} </span>
-            <div class="session-type"> {{types[offer_id]}} </div>
-            <div :class="states[state_id].class"> {{states[state_id].title}} </div>
+            <div class="session-type"> {{ types[offer_id] }} </div>
+            <div :class="states[state_id].class" v-html="state"> </div>
             {{/* users[0].activity_state ? 'AKTYWNY' : 'NIEAKTYWNY'  */}}
 
         </div>
@@ -29,7 +29,7 @@
         </div>
         
     </router-link>
-    <div id="session-edit-form">
+    <div id="session-edit-form" v-if="me.role_id==2">
             <button id="session-edit" @click="toggleModal"> <img src="/img/SVG/session_edit.svg"/>  </button>
             <settings-modal v-if="settings_toggled" v-bind="$props"/> 
         </div>
@@ -54,11 +54,13 @@ const { mapActions, mapGetters, mapMutations } = createNamespacedHelpers('common
             id: Number,
             state_id: Number,
             offer_id: Number,
+            start_date: String,
             users: Array,
         },
         data()
         {
             return {
+                milli: 0,
                 toggled: false,
                 settings_toggled: false,
                 states: {
@@ -91,21 +93,21 @@ const { mapActions, mapGetters, mapMutations } = createNamespacedHelpers('common
         computed:
         {
             ...mapGetters( {
-            //user: 'auth/user',
-            authenticated: 'auth/authenticated',
+            me: 'auth/user',
             sessionNotifications: 'notification/sessionNotifications',
             user: 'user/user'
             }),
             notifications()
             {
                 return this.sessionNotifications(this.id);
+            },
+            state()
+            {
+                return this.state_id!=2 ? this.states[this.state_id].title : this.timeLeft(this.start_date);
             }
         },
         methods:
         {
-            ...mapActions({
-            auth: 'auth/auth',
-            }),
             ...mapMutations({
             DELETE_SESSION: 'session/DELETE_SESSION'
             }),
@@ -127,14 +129,37 @@ const { mapActions, mapGetters, mapMutations } = createNamespacedHelpers('common
             },
             toggleModal(e)
             {
-                 event.preventDefault();
+                event.preventDefault();
                 event.stopPropagation();
                 this.settings_toggled=!this.settings_toggled;
                     
+            },
+            timeLeft(date)
+            {
+                console.log(this.milli);
+                if(this.milli <= 60000)
+                {
+                    return 'Twoja wrózba wkrótce się rozpocznie';
+                }
+                let minutes = Math.floor(this.milli / 60000 );
+                let hours = Math.floor( minutes / 60 );
+                let days = Math.floor( hours / 24);
+                minutes%=60;
+                hours%=60;
+                hours%=24;
+                return `${this.states[this.state_id].title} <br/> ${days > 0 ? days+" dni <br/>" : ''} ${hours > 0 ? hours+" godzin <br/>" : ''} ${minutes > 0 ? minutes+" minut" : ''}`;
             }
         },
         mounted() {
-            console.log(this.id);
+            this.milli = new Date(this.start_date) - new Date()
+            let timer = setInterval( () => {
+                if(this.milli > 0) this.milli = new Date(this.start_date) - new Date()
+                else 
+                {
+                    clearInterval(timer);
+                }
+                
+                }, 1000);
         }
     }
 </script>

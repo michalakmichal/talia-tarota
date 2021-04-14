@@ -35,8 +35,6 @@ class MessageController extends Controller
     //// ?
     public function store(Request $request, Session $session)
     {
-        // jesli jestem adminem
-        // z mojego konta tylko jako ja / z konta admina jako kazdy uzytkownik
         // jesli uczestnicze w konwersacji $request['data']['user_id']
         $this->authorize('create', [ Message::class, $session ]);
         $message = $this->repository->createMessage(
@@ -59,17 +57,9 @@ class MessageController extends Controller
     {
         return $this->repository->destroySession();
     }
-    //Requests from users, middleware users + auth
     public function getSessionMessages(Request $request, Session $session)
     {
-        //$this->authorize('view', $user);
-        //return $user->sessions;
-        //return $request->user()->id;
-        //return auth()->user()->sessions;
-        //$this->authorize('view', $request->user->sessions[0]);
-        //$this->authorize('view', [$user, Session::class]);
-        //if($request->id)
-        //return $this->repository->getUserSessions($request->user()->id);
+        $this->authorize('view', [ Message::class, $session ]);
         return $this->repository->getSessionMessages($session->id);
     }
     

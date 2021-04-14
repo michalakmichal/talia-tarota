@@ -7,10 +7,11 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use App\Traits\AdminAuth;
 
 class MessagePolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, AdminAuth;
 
     /**
      * Determine whether the user can view any models.
@@ -30,9 +31,11 @@ class MessagePolicy
      * @param  \App\Models\Message  $message
      * @return mixed
      */
-    public function view(User $user, Message $message)
+    public function view(User $user, Session $session)
     {
-        //
+        return $session->users->contains($user)
+        ? Response::allow()
+        : Response::deny('You are not allowed to view this content');
     }
 
     /**
@@ -46,7 +49,7 @@ class MessagePolicy
     {
         return $session->users->contains($user)
         ? Response::allow()
-        : Response::deny('You can\'t send this message.');
+        : Response::deny('You can\'t send messages to the sessions you don\'t belong.');
     }
 
     /**

@@ -38,18 +38,6 @@ export default {
             }
         },
         type: String
-    },
-    computed: {
-    },
-    methods:
-    {
-    },
-    mounted()
-    {
-        
-        //console.log("z tabeli", this.$store);
-        //await this.getSessions();
-        //console.log("sesje po :::: ", this.sessions);
     }
 }
 </script>

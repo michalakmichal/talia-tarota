@@ -2,7 +2,7 @@
     <div id="account-view">
     <div style="width: 100%;">
         <div class="user-miniature"> 
-                <div class="content" :style="user ? `background-image:url(https://randomuser.me/api/portraits/men/${user.id}.jpg)` : ''"> </div>
+                <div class="content" :style="user ? `background-image:url(https://randomuser.me/api/portraits/women/${user.id}.jpg)` : ''"> </div>
                 <div class="activity-state"> </div>
         </div>
      </div>

@@ -51,6 +51,7 @@ import ScrollToPlugin from "gsap/ScrollToPlugin";
         },
         computed: {
             ...mapGetters( {
+            user: 'auth/user',
             messages: 'message/messages',
             sessions_loaded: 'session/sessions_loaded',
             })
@@ -124,7 +125,7 @@ import ScrollToPlugin from "gsap/ScrollToPlugin";
                                         session_id: this.id  });
                 }
             },
-            sendTypingEvent() //zrobić osobny plik z eventami dla czatu i go zaimportować :)
+            sendTypingEvent() //zrobić osobny plik z eventami dla czatu i go zaimportować
             {
                 this.channel.whisper('typing', this.user.name);
             }

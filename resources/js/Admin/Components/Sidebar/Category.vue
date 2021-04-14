@@ -1,58 +1,28 @@
 <template>
     <div>
-        <router-link :to="{path: '/admin'}" class="category" ref="notif">
+        <router-link :to="{path: '/admin'}" class="category">
         Dashboard
         </router-link>
-        <router-link :to="{path: '/admin/offers'}" class="category" ref="notif">
+        <router-link :to="{path: '/admin/offers'}" class="category">
         Oferta
         </router-link>
-        <router-link :to="{path: '/admin/sessions'}" class="category" ref="notif">
+        <router-link :to="{path: '/admin/sessions'}" class="category">
         Zamówienia
         </router-link>
-        <div class="category" ref="notif">
+        <div class="category">
         Tarot
         </div>
-        <div class="category" ref="notif">
+        <div class="category">
         Blog
         </div>
-        <div class="category" ref="notif">
+        <div class="category">
         Uzytkownicy
         </div>
-        <div class="category" ref="notif">
+        <div class="category">
         Zaawansowane
         </div>
     </div>
 </template>
-
-<script>
-import {gsap} from 'gsap';
-
-    export default {
-        props:
-        {
-           
-        },
-        computed: {
-        },
-        methods:
-        {
-
-            async init()
-            {
-               
-            }
-        },
-       async mounted() {
-            gsap.timeline().fromTo(this.$refs['notif'], {xPercent: -50, opacity: 0}, {
-                opacity: 1,
-                duration: 1,
-                xPercent: 0,
-                //stagger: 0.4
-            });
-           
-        }
-    }
-</script>
 <style lang="scss" scoped>
 .category
 {
